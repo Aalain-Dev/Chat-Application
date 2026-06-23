@@ -1,0 +1,2 @@
+1. Learned about how to initialize the TypeScript and need to do the changes accordingly in the tsconfig.json file. 
+2. Learned about the NPM package call concurrently that is required to run two commands in one Rather than having two separate terminals 

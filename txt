@@ -1,0 +1,11 @@
+1. Create a user.ts file and in that create a model of the user and that will have name and email 
+2. Then got ot upstash.com and then create a account and then get the redis url and store in .env 
+3. Next install the redis in user folder using npm i redis
+4. now again in user folder run this command npm i -D @types/redis
+5. now in index.ts file create a connect with redis see video for this 
+6. now create the folder  call controller and a file called user.routes.ts in router folder 
+7. create a basic route and then call that in index.ts see video here 
+8.  setup the rabbit mq 
+9. now search for the amqplib and insatll in project using npm i amqplib
+10. and also for install npm i -D @types/amqplib
+11. now create a new file called RABBITMQ.TS IN config file and then in that create a connection to rabbit mq and then call that in  index.ts
