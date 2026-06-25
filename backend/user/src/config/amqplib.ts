@@ -2,7 +2,7 @@ import amqp from "amqplib";
 import type { Channel } from "amqplib";
 
 let channel: Channel | null = null;
-
+// Rabbit Mq Connection Code
 export const connectRabbitMQ = async (): Promise<Channel> => {
   try {
     if (channel) {
@@ -55,3 +55,4 @@ export const publishToQueue = async (queue: string, message: any) => {
     console.log(e.message);
   }
 };
+
