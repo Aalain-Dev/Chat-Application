@@ -10,9 +10,10 @@ const app = express();
 
 var PORT = 5000;
 connectDB();
-connectredis()
+connectredis();
 connectRabbitMQ();
+app.use(express.json())
 app.use("api/v1",userroutes)
 app.listen((PORT) => {
-  console.log(`Server Running  on the Port 5000`);
+  console.log(`Server Running  on th  e Port 5000`);
 });
