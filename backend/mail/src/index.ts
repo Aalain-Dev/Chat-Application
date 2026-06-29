@@ -6,8 +6,8 @@ dotenv.config();
 
 const app = express();
 
-var PORT = 5000;
 sendOtpToConsumer()
-app.listen((PORT) => {
-  console.log(`Server Running  on the Port 5000`);
+const PORT_VALUE = Number(process.env.PORT)
+app.listen(PORT_VALUE, ()=> {
+  console.log(`Mail Server Running  is running on the  Port ${PORT_VALUE}`);
 });

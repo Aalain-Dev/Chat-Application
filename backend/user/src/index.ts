@@ -8,12 +8,12 @@ dotenv.config();
 
 const app = express();
 
-var PORT = 5000;
+var PORT_VALUE = process.env.PORT
+app.use(express.json())
 connectDB();
 connectredis();
 connectRabbitMQ();
-app.use(express.json())
-app.use("api/v1",userroutes)
-app.listen((PORT) => {
-  console.log(`Server Running  on th  e Port 5000`);
+app.use("/api/v1",userroutes)
+app.listen(PORT_VALUE,() => {
+  console.log(`User Server is Running on ${PORT_VALUE}`);
 });

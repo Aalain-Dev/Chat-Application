@@ -43,28 +43,31 @@ export const sendOtpToConsumer = async (): Promise<Channel> => {
       try {
         const data = JSON.parse(msg.content.toString());
 
-        const { email, otp } = data;
+        const { to, subject, body } = data;
+
+        if (!to) {
+          console.error("Skipping message with no recipient:", data);
+          channel?.ack(msg);
+          return;
+        }
 
         await transporter.sendMail({
           from: process.env.EMAIL_USER,
-          to: email,
-          subject: "Your OTP Code",
-          html: `
-            <h2>OTP Verification</h2>
-            <p>Your OTP is:</p>
-            <h1>${otp}</h1>
-          `,
+          to,
+          subject: subject ?? "Your OTP Code",
+          text: body,
         });
 
-        console.log(`OTP sent to ${email}`);
+        console.log(`OTP sent to ${to}`);
 
         // Remove message from queue
         channel?.ack(msg);
-      } catch (error) {
+      } catch (error:any) {
         console.error("Failed to send OTP:", error);
 
-        // Requeue the message
-        channel?.nack(msg, false, true);
+        // Retry once at most; never loop forever on a poison/auth/rate-limit error.
+        const alreadyRetried = msg.fields.redelivered;
+        channel?.nack(msg, false, !alreadyRetried);
       }
     });
 
